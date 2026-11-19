@@ -49,7 +49,17 @@ Bugs and ideas are welcome in [GitHub Issues](https://github.com/semicolonconsul
 
 ### Privacy
 
-Cubbyhole has no account and no analytics. Your sign-ins and data stay on your computer, and each app talks only to its own website.
+Cubbyhole has no account, no analytics and no crash reports. Your sign-ins, cookies and settings stay on your computer.
+
+It is built on Electron, not on Google Chrome, so the parts of Chrome that report to Google are not there: no usage statistics, no Google account sync of the browser, no Safe Browsing lookups of the pages you visit and no search suggestions.
+
+What Cubbyhole does connect to:
+
+- **The apps you add.** Each one talks to its own website, as it would in any browser. Gmail and Google Chat talk to Google because they are Google services.
+- **The Chrome Web Store**, when you browse or install extensions, and afterwards to check your installed extensions for updates. The update check sends the extensions' IDs and versions to Google.
+- **Google's download server, for spelling dictionaries**, on Windows and Linux. macOS uses the system's own spell checker instead.
+
+Nothing else is contacted. We check this by recording the network traffic of a fresh install: on Linux the only connection besides the app you add is the dictionary download.
 
 ### More from Semicolon Consulting
 
