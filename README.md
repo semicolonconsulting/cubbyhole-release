@@ -41,7 +41,7 @@ Download the latest release from [Releases](https://github.com/semicolonconsulti
 - **Windows**: the `.exe` installer.
 - **Linux**: the `.AppImage` or the `.deb`.
 
-Cubbyhole is a free beta. The macOS app is signed and notarized by Apple. The Windows and Linux installers are not signed yet, so Windows may warn you the first time you run the installer.
+Cubbyhole is a free beta. The macOS app is signed and notarized by Apple. The Windows and Linux installers are not signed yet, so Windows may warn you the first time you run the installer: choose **More info**, then **Run anyway**.
 
 ### Feedback
 
