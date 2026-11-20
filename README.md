@@ -5,7 +5,7 @@
 [![Latest release](https://img.shields.io/github/v/release/semicolonconsulting/cubbyhole-release?label=release)](https://github.com/semicolonconsulting/cubbyhole-release/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/semicolonconsulting/cubbyhole-release/total.svg)](https://github.com/semicolonconsulting/cubbyhole-release/releases)
 [![macOS, Windows, Linux](https://img.shields.io/badge/macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-black)](#install)
-[![Price: free](https://img.shields.io/badge/price-free-blue.svg)](#install)
+[![Price: free beta](https://img.shields.io/badge/price-free%20beta-blue.svg)](#install)
 
 Cubbyhole puts your web apps in one window. Gmail, Outlook, Slack, Teams, Discord, Google Chat or any website sit side by side, each in its own compartment with its own sign-in and its own Chrome extensions.
 
@@ -41,7 +41,7 @@ Download the latest release from [Releases](https://github.com/semicolonconsulti
 - **Windows**: the `.exe` installer.
 - **Linux**: the `.AppImage` or the `.deb`.
 
-Cubbyhole is free. The installers are not signed yet, so your system may warn you the first time you open the app. On macOS, if it refuses to open, run `xattr -cr /Applications/Cubbyhole.app` in Terminal once and open it again.
+Cubbyhole is a free beta. The macOS app is signed and notarized by Apple. The Windows and Linux installers are not signed yet, so Windows may warn you the first time you run the installer.
 
 ### Feedback
 
