@@ -57,7 +57,7 @@ What Cubbyhole does connect to:
 
 - **The apps you add.** Each one talks to its own website, as it would in any browser. Gmail and Google Chat talk to Google because they are Google services.
 - **The Chrome Web Store**, when you browse or install extensions, and afterwards to check your installed extensions for updates. The update check sends the extensions' IDs and versions to Google.
-- **GitHub, to check for a new version of Cubbyhole** (from 1.0.2), shortly after start and then once a day. It is a plain request with no identifiers, and nothing is installed without you. Turn off **Check for updates automatically** in Settings to stop this.
+- **GitHub, to check for a new version of Cubbyhole**, shortly after start and then once a day. It is a plain request with no identifiers, and nothing is installed without you. Turn off **Check for updates automatically** in Settings to stop this.
 - **Google's download server, for spelling dictionaries**, on Windows and Linux. Turn off **Check spelling** in Settings to stop this. macOS uses the system's own spell checker instead.
 
 Nothing else is contacted. We check this by recording the network traffic of a fresh install: on Linux the only connections besides the app you add are the dictionary download and the update check, and with both settings off there are none.
