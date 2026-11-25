@@ -39,9 +39,9 @@ Download the latest release from [Releases](https://github.com/semicolonconsulti
 
 - **macOS** (Apple Silicon): the `.dmg`. Open it and drag Cubbyhole onto Applications.
 - **Windows**: the `.exe` installer.
-- **Linux**: the `.AppImage` or the `.deb`.
+- **Linux**: the `.AppImage` (updates itself) or the `.deb` (Debian, Ubuntu, Linux Mint). Installing the `.deb` also adds Cubbyhole's signed apt repository, so later versions arrive with your system updates in Update Manager or `sudo apt upgrade`.
 
-Cubbyhole is a free beta. The macOS app is signed and notarized by Apple. The Windows and Linux installers are not signed yet, so Windows may warn you the first time you run the installer: choose **More info**, then **Run anyway**.
+Cubbyhole is a free beta. The macOS app is signed and notarized by Apple. The Windows installer is not signed yet, so Windows may warn you the first time you run it: choose **More info**, then **Run anyway**. Linux doesn't ask for signed apps; each release has a `SHA256SUMS.txt`, signed with Cubbyhole's key (`SHA256SUMS.txt.asc`), to check your download against.
 
 ### Feedback
 
@@ -57,6 +57,7 @@ What Cubbyhole does connect to:
 
 - **The apps you add.** Each one talks to its own website, as it would in any browser. Gmail and Google Chat talk to Google because they are Google services.
 - **The Chrome Web Store**, when you browse or install extensions, and afterwards to check your installed extensions for updates. The update check sends the extensions' IDs and versions to Google.
+- **GitHub, for Linux system updates**, if you installed the `.deb`: your system's own update check (apt) reads Cubbyhole's package list from GitHub. Remove `/etc/apt/sources.list.d/cubbyhole.list` to stop this.
 - **GitHub, to check for a new version of Cubbyhole**, shortly after start and then once a day. It is a plain request with no identifiers, and nothing is installed without you. Turn off **Check for updates automatically** in Settings to stop this.
 - **Google's download server, for spelling dictionaries**, on Windows and Linux. Turn off **Check spelling** in Settings to stop this. macOS uses the system's own spell checker instead.
 

@@ -1,0 +1,76 @@
+name: Linux repository and checksums
+
+# Runs when a release is published (and by hand for an existing release).
+# 1. Adds SHA256SUMS.txt and its signature SHA256SUMS.txt.asc to the release.
+# 2. Rebuilds the signed apt repository on the "apt" branch, pointing at that release's .deb,
+#    so installed .deb copies get the update through Update Manager / apt.
+#
+# Needs two repository secrets: APT_GPG_KEY (the armored private signing key) and
+# APT_GPG_PASSPHRASE. Without them it does nothing.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, e.g. v0.1.14 (default the latest release)
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: linux-repo
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      APT_GPG_KEY: ${{ secrets.APT_GPG_KEY }}
+      APT_GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pick the release
+        id: rel
+        run: |
+          tag="${{ github.event.release.tag_name || inputs.tag }}"
+          [ -n "$tag" ] || tag=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if [ -z "$APT_GPG_KEY" ]; then echo "::warning::No APT_GPG_KEY secret, nothing signed or published"; fi
+      - name: Import the signing key
+        if: ${{ env.APT_GPG_KEY != '' }}
+        run: printf '%s\n' "$APT_GPG_KEY" | gpg --batch --pinentry-mode loopback --passphrase "$APT_GPG_PASSPHRASE" --import
+      - name: Checksums
+        if: ${{ env.APT_GPG_KEY != '' }}
+        run: |
+          tag=${{ steps.rel.outputs.tag }}
+          mkdir assets && cd assets
+          gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern 'Cubbyhole-*'
+          sha256sum Cubbyhole-* > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$APT_GPG_PASSPHRASE" --armor --detach-sign -o SHA256SUMS.txt.asc SHA256SUMS.txt
+          gh release upload "$tag" SHA256SUMS.txt SHA256SUMS.txt.asc --repo "$GITHUB_REPOSITORY" --clobber
+      - name: Apt repository
+        if: ${{ env.APT_GPG_KEY != '' }}
+        run: |
+          tag=${{ steps.rel.outputs.tag }}
+          shopt -s nullglob
+          debs=(assets/Cubbyhole-*-linux-amd64.deb)
+          if [ "${#debs[@]}" -ne 1 ]; then echo "::warning::$tag has no single amd64 .deb, apt repository left as it was"; exit 0; fi
+          mkdir repo
+          # Keep the previous index's by-hash files: a cached old InRelease may still point at them.
+          if git clone -q --depth 1 -b apt "https://github.com/${GITHUB_REPOSITORY}.git" prev 2>/dev/null && [ -d prev/by-hash ]; then
+            cp -r prev/by-hash repo/
+          fi
+          scripts/apt-repo.sh "$tag" "${debs[0]}" repo
+          cp .github/apt-README.md repo/README.md
+          cd repo
+          git init -q -b apt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "apt repository for $tag"
+          # One commit, replaced each release: the branch only ever holds the current index.
+          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" apt
