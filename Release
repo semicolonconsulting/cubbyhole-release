@@ -1,0 +1,20 @@
+Origin: Cubbyhole
+Label: Cubbyhole
+Suite: raw/apt
+Codename: raw/apt
+Architectures: amd64
+Date: Thu, 26 Nov 2026 23:25:10 +0000
+Description: Cubbyhole, your web apps in one window
+Acquire-By-Hash: yes
+MD5Sum:
+ 96ee35b3c05cd2ff1e5e3ad687cddc95 879 Packages
+ 7caf4e7451f826a9ce60dce95cdbb84d 587 Packages.gz
+SHA1:
+ 095a79fe7af6e198ae8d96e403532360c31abbfe 879 Packages
+ 9ab7251e40f029c1ad536d1a74a74faa186f6708 587 Packages.gz
+SHA256:
+ 25ae546bbf70baf65b8bd2206d07e5197c76b799db646db40f81af8df50bf788 879 Packages
+ e7968092de459ab6d90c1e6b363f870b14f8ff41e0d89bc161004d7902ef6870 587 Packages.gz
+SHA512:
+ ea02ac26d3c5c7442ab5ff85c0de4150c9e4000ac6f56730f887962ed4282c9e7eb4d126ffabc466e1e7192fdd42100d5de62f657b2a31d9ecd426082845f609 879 Packages
+ ff9c0cae011074c9aa73afb4433a73a07268478c4f19bb9558151c3d75f2155b7f3b85a79a63a2cf9448e47dde2d846c0663809527b5406496c506d75f84b392 587 Packages.gz

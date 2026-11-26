@@ -1,0 +1,20 @@
+Package: cubbyhole
+Version: 0.1.15
+License: UNLICENSED
+Vendor: Cubbyhole
+Architecture: amd64
+Maintainer: Cubbyhole
+Installed-Size: 283259
+Depends: libgtk-3-0, libnotify4, libnss3, libxss1, libxtst6, xdg-utils, libatspi2.0-0, libuuid1, libsecret-1-0
+Recommends: libappindicator3-1
+Section: default
+Priority: optional
+Homepage: https://github.com/semicolonconsulting/cubbyhole
+Description: Your web apps in one window
+  Your web apps in one window, each with its own sign-in and Chrome extensions.
+Filename: releases/download/v0.1.15/Cubbyhole-0.1.15-linux-amd64.deb
+Size: 102573324
+MD5sum: f102cccd981d721378e695e902ada63f
+SHA1: 274d15cfe09f9a7209e4185e7a515fe75149e63c
+SHA256: 72f5bacd865611487caf7cc875820aacc0027f81802629618969e8b98c2d72de
+SHA512: ffe2da51b51d43aec521f6baa48ae8759b542c82ea3c57814e55a607a9686c02c2f8957291f53fba2e0509f516a62dada8c6209fc9d3aa3c4555a655215da218
